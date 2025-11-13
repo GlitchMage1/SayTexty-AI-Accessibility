@@ -3,7 +3,7 @@ from django.db import models
 
 
 
-сlass Session(models.Model): # type: ignore
+class Session(models.Model): # type: ignore
     MODE_CHOICES = [
         ('lecture','Lecture Mode'),
         ('conversation', 'Conversation Mode'),
