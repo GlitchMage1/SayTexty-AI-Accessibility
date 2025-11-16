@@ -1,13 +1,15 @@
 
-
+from django.conf import settings
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls.static import static
 
 from .views import *
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", index, name='index')
+    path("", index, name='index'),
+    path('set-language/', set_language, name='set_language')
 ]
 
 

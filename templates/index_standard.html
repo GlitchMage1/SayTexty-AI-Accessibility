@@ -1,0 +1,425 @@
+{% load i18n %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE|slice:":2" }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HearMe — {% trans "Speech to Text Assistant" %}</title>
+    <link rel="stylesheet" href="{% static 'index_standard.css' %}">
+</head>
+
+<body>
+
+<!-- PRELOADER -->
+<div id="hm-preloader">
+    <div class="hm-preloader-circle"></div>
+    <div class="hm-preloader-text">HearMe</div>
+</div>
+
+<div class="hm-page hidden-preloader">
+    <div class="hm-shell">
+
+        <!-- NAVBAR -->
+        <header class="hm-nav">
+            <div class="hm-logo-group">
+                <div class="hm-logo-mark">
+                    <div class="hm-logo-mark-icon"></div>
+                </div>
+                <div>
+                    <div class="hm-logo-text-main">HearMe</div>
+                    <div class="hm-logo-text-sub">{% trans "AI Accessibility Project" %}</div>
+                </div>
+            </div>
+
+            <div class="hm-nav-right">
+
+                <div class="hm-tagline">
+                    {% trans "Turn speech into clear text — for lectures, lessons and conversations." %}
+                </div>
+
+                <!-- UI LANGUAGE SWITCH -->
+                <form action="{% url 'set_language' %}" method="post" class="hm-lang-form">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ request.path }}">
+
+                    <button type="submit" name="language" value="en"
+                            class="hm-lang-btn {% if LANGUAGE_CODE|slice:':2' == 'en' %}hm-lang-btn-active{% endif %}">
+                        EN
+                    </button>
+                    <button type="submit" name="language" value="ru"
+                            class="hm-lang-btn {% if LANGUAGE_CODE|slice:':2' == 'ru' %}hm-lang-btn-active{% endif %}">
+                        RU
+                    </button>
+                    <button type="submit" name="language" value="uz"
+                            class="hm-lang-btn {% if LANGUAGE_CODE|slice:':2' == 'uz' %}hm-lang-btn-active{% endif %}">
+                        UZ
+                    </button>
+                </form>
+
+                <!-- MODE TOGGLE: STANDARD / PRO -->
+                <div class="hm-mode-toggle">
+                    <button type="button"
+                            class="hm-mode-toggle-btn hm-mode-toggle-active"
+                            data-view="standard">
+                        {% trans "Standard" %}
+                    </button>
+                    <button type="button"
+                            class="hm-mode-toggle-btn"
+                            data-view="pro">
+                        {% trans "Pro mode" %}
+                    </button>
+                </div>
+
+            </div>
+        </header>
+
+        <!-- MAIN (SLIDES WRAPPER) -->
+        <main class="hm-main">
+
+            <!-- ================= STANDARD LAYOUT ================ -->
+            <div class="hm-layout hm-layout-standard hm-layout-active">
+                <div class="hm-main-grid">
+
+                    <!-- LEFT -->
+                    <section class="hm-hero-left">
+                        <div class="hm-hero-copy">
+                            <div class="hm-kicker">
+                                <span class="hm-kicker-dot"></span>
+                                {% trans "Ready when you are" %}
+                            </div>
+                            <h1 class="hm-title">
+                                {% trans "Start a" %}
+                                <span>{% trans "clean recording" %}</span>
+                                {% trans "in one click." %}
+                            </h1>
+                            <p class="hm-subtitle">
+                                {% trans "Pick a mode, choose the language, and HearMe will transcribe everything for you." %}
+                            </p>
+                        </div>
+
+                        <!-- MAIN CARD FORM -->
+                        <div class="hm-standard-card">
+                            <form method="post"
+                                  action="{% url 'index' %}"
+                                  class="hm-mode-wrapper">
+                                {% csrf_token %}
+
+                                <div class="hm-mode-label">{% trans "Session mode" %}</div>
+
+                                <div class="hm-mode-grid">
+
+                                    <!-- LECTURE -->
+                                    <label class="hm-mode-card fade-card">
+                                        <input type="radio" name="mode" value="lecture" class="hm-mode-radio" checked>
+                                        <div class="hm-mode-tag">{% trans "Long-form" %}</div>
+                                        <div class="hm-mode-title">
+                                            <div class="hm-mode-icon">📚</div>
+                                            {% trans "Lecture mode" %}
+                                            <span class="hm-mode-chip">
+                                                {% trans "For classes & presentations" %}
+                                            </span>
+                                        </div>
+                                        <div class="hm-mode-desc">
+                                            {% trans "Optimized for long lessons, talks and speeches." %}
+                                        </div>
+                                    </label>
+
+                                    <!-- CONVERSATION -->
+                                    <label class="hm-mode-card fade-card">
+                                        <input type="radio" name="mode" value="conversation" class="hm-mode-radio">
+                                        <div class="hm-mode-tag">{% trans "Conversations" %}</div>
+                                        <div class="hm-mode-title">
+                                            <div class="hm-mode-icon">💬</div>
+                                            {% trans "Conversation mode" %}
+                                            <span class="hm-mode-chip">
+                                                {% trans "For dialogues & meetings" %}
+                                            </span>
+                                        </div>
+                                        <div class="hm-mode-desc">
+                                            {% trans "Short dynamic chunks for discussions and Q&A." %}
+                                        </div>
+                                    </label>
+                                </div>
+
+                                <!-- SPEECH LANGUAGE -->
+                                <div class="hm-speech-lang">
+                                    <div class="hm-speech-label">
+                                        {% trans "Speech language" %}
+                                    </div>
+                                    <div class="hm-speech-group">
+                                        <label class="hm-speech-btn">
+                                            <input type="radio" name="language" value="en"
+                                                   {% if LANGUAGE_CODE|slice:':2' == 'en' %}checked{% endif %}>
+                                            <span>{% trans "English" %}</span>
+                                        </label>
+                                        <label class="hm-speech-btn">
+                                            <input type="radio" name="language" value="ru"
+                                                   {% if LANGUAGE_CODE|slice:':2' == 'ru' %}checked{% endif %}>
+                                            <span>{% trans "Russian" %}</span>
+                                        </label>
+                                        <label class="hm-speech-btn">
+                                            <input type="radio" name="language" value="uz"
+                                                   {% if LANGUAGE_CODE|slice:':2' == 'uz' %}checked{% endif %}>
+                                            <span>{% trans "Uzbek" %}</span>
+                                        </label>
+                                    </div>
+                                    <p class="hm-speech-hint">
+                                        {% trans "This is the language people will speak in this session." %}
+                                    </p>
+                                </div>
+
+                                <div class="hm-actions">
+                                    <button type="submit" class="hm-start-btn">
+                                        <div class="hm-mic-anim"></div>
+                                        {% trans "Start recording" %}
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+
+                    </section>
+
+                    <!-- RIGHT: AVATAR + HISTORY (STANDARD) -->
+                    <section class="hm-hero-right">
+                        <div class="hm-avatar-orbit hm-avatar-orbit-standard">
+                            <div class="hm-avatar-orbit-waves"></div>
+                            <div class="hm-avatar-circle">
+                                <div class="hm-avatar-face">
+                                    <div class="hm-avatar-smile"></div>
+                                </div>
+                                <div class="hm-avatar-wave"></div>
+                            </div>
+                        </div>
+
+                        <!-- HISTORY -->
+                        <div class="hm-history-card">
+                            <div class="hm-history-header">
+                                <span class="hm-history-title">{% trans "Recent sessions" %}</span>
+
+                                <a href="{% url 'index' %}" class="hm-history-link">
+                                    {% trans "Library" %}
+                                </a>
+
+                                <span class="hm-history-dot"></span>
+                            </div>
+                            <ul class="hm-history-list">
+                                {% for session in recent_sessions %}
+                                    <li class="hm-history-item">
+                                        <div class="hm-history-row-top">
+                                            <span class="hm-history-name">
+                                                {{ session.title|default:_("Untitled session") }}
+                                            </span>
+                                            <span class="hm-history-mode">
+                                                {{ session.get_mode_display }}
+                                            </span>
+                                        </div>
+                                        <div class="hm-history-row-bottom">
+                                            <span class="hm-history-lang">
+                                                {{ session.get_language_display }}
+                                            </span>
+                                            <span class="hm-history-time">
+                                                {{ session.created_at|date:"M j, H:i" }}
+                                            </span>
+                                        </div>
+                                    </li>
+                                {% empty %}
+                                    <li class="hm-history-empty">
+                                        {% trans "You don't have any sessions yet." %}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+
+                        <div class="hm-avatar-pill">
+                            <strong>HearMe</strong> · {% trans "built for accessibility" %}
+                        </div>
+
+                        <p class="hm-avatar-caption">
+                            {% trans "Simple, friendly and clear — made for everyone." %}
+                        </p>
+                    </section>
+
+                </div>
+            </div>
+
+            <!-- ================= PRO / HARD LAYOUT (TECH) ================ -->
+            <div class="hm-layout hm-layout-pro">
+                <div class="hm-main-grid-pro">
+
+                    <!-- LEFT: ADVANCED CONSOLE -->
+                    <section class="hm-hero-left-pro">
+                        <div class="hm-kicker-pro">
+                            <span class="hm-kicker-dot-pro"></span>
+                            {% trans "Pro mode activated" %}
+                        </div>
+                        <h1 class="hm-title-pro">
+                            {% trans "Advanced transcription console" %}
+                        </h1>
+                        <p class="hm-subtitle-pro">
+                            {% trans "Fine-tuned controls, richer feedback and a darker interface for deep work sessions." %}
+                        </p>
+
+                        <!-- PRO STATUS STRIP -->
+                        <div class="hm-pro-status">
+                            <div class="hm-pro-chip">
+                                <span class="hm-pro-dot-online"></span>
+                                {% trans "AI engine" %}: <strong>{% trans "Online" %}</strong>
+                            </div>
+                            <div class="hm-pro-chip">
+                                {% trans "Latency" %}: <strong>&lt; 400ms</strong>
+                            </div>
+                            <div class="hm-pro-chip">
+                                {% trans "Stability" %}: <strong>99.7%</strong>
+                            </div>
+                        </div>
+
+                        <!-- PRO FORM -->
+                        <form method="post"
+                              action="{% url 'index' %}"
+                              class="hm-mode-wrapper-pro">
+                            {% csrf_token %}
+
+                            <div class="hm-mode-label-pro">
+                                {% trans "Session profile" %}
+                            </div>
+
+                            <div class="hm-mode-grid-pro">
+
+                                <!-- PRO LECTURE -->
+                                <label class="hm-mode-card-pro hm-mode-card-pro-active">
+                                    <input type="radio" name="mode" value="lecture" class="hm-mode-radio-pro" checked>
+                                    <div class="hm-mode-pro-top">
+                                        <span class="hm-mode-pro-tag">{% trans "Long-form" %}</span>
+                                        <span class="hm-mode-pro-badge">{% trans "Recommended" %}</span>
+                                    </div>
+                                    <div class="hm-mode-pro-title">
+                                        <span>📡 {% trans "Lecture mode +" %}</span>
+                                    </div>
+                                    <p class="hm-mode-pro-desc">
+                                        {% trans "Continuous capture with smarter segmentation and noise-resilient decoding for complex lectures." %}
+                                    </p>
+                                </label>
+
+                                <!-- PRO CONVERSATION -->
+                                <label class="hm-mode-card-pro">
+                                    <input type="radio" name="mode" value="conversation" class="hm-mode-radio-pro">
+                                    <div class="hm-mode-pro-top">
+                                        <span class="hm-mode-pro-tag">{% trans "Dialogues" %}</span>
+                                        <span class="hm-mode-pro-badge-alt">{% trans "Dynamic" %}</span>
+                                    </div>
+                                    <div class="hm-mode-pro-title">
+                                        <span>🧩 {% trans "Conversation mode +" %}</span>
+                                    </div>
+                                    <p class="hm-mode-pro-desc">
+                                        {% trans "Segmented interaction tuned for fast Q&A, consultations and overlapping speakers." %}
+                                    </p>
+                                </label>
+                            </div>
+
+                            <!-- PRO SPEECH LANG -->
+                            <div class="hm-speech-lang-pro">
+                                <div class="hm-speech-label-pro">
+                                    {% trans "Speech language" %}
+                                </div>
+                                <div class="hm-speech-group-pro">
+                                    <label class="hm-speech-chip-pro">
+                                        <input type="radio" name="language" value="en"
+                                               {% if LANGUAGE_CODE|slice:':2' == 'en' %}checked{% endif %}>
+                                        <span>EN</span>
+                                    </label>
+                                    <label class="hm-speech-chip-pro">
+                                        <input type="radio" name="language" value="ru"
+                                               {% if LANGUAGE_CODE|slice:':2' == 'ru' %}checked{% endif %}>
+                                        <span>RU</span>
+                                    </label>
+                                    <label class="hm-speech-chip-pro">
+                                        <input type="radio" name="language" value="uz"
+                                               {% if LANGUAGE_CODE|slice:':2' == 'uz' %}checked{% endif %}>
+                                        <span>UZ</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- PRO ACTIONS -->
+                            <div class="hm-actions-pro">
+                                <button type="submit" class="hm-start-btn-pro">
+                                    <span class="hm-start-pulse-pro"></span>
+                                    {% trans "Launch advanced session" %}
+                                </button>
+                                <p class="hm-hint-pro">
+                                    {% trans "Pro mode keeps the interface dark and focused while using the same safe engine under the hood." %}
+                                </p>
+                            </div>
+                        </form>
+
+                    </section>
+
+                    <!-- RIGHT: PRO AVATAR + PANEL -->
+                    <section class="hm-hero-right-pro">
+                        <div class="hm-avatar-orbit-pro">
+                            <div class="hm-avatar-circle-pro">
+                                <div class="hm-avatar-face-pro">
+                                    <!-- наушники -->
+                                    <div class="hm-avatar-headphones"></div>
+                                    <!-- глаза и рот -->
+                                    <div class="hm-avatar-pro-eye hm-avatar-pro-eye-left"></div>
+                                    <div class="hm-avatar-pro-eye hm-avatar-pro-eye-right"></div>
+                                    <div class="hm-avatar-pro-mouth"></div>
+                                </div>
+                                <div class="hm-avatar-wave-pro"></div>
+                            </div>
+                        </div>
+
+                        <div class="hm-pro-panel">
+                            <div class="hm-pro-panel-header">
+                                <span class="hm-pro-panel-title">
+                                    {% trans "Signal overview" %}
+                                </span>
+                                <span class="hm-pro-panel-chip">
+                                    {% trans "Live" %}
+                                </span>
+                            </div>
+                            <div class="hm-pro-bars">
+                                <div class="hm-pro-bar"></div>
+                                <div class="hm-pro-bar"></div>
+                                <div class="hm-pro-bar"></div>
+                                <div class="hm-pro-bar"></div>
+                            </div>
+
+                            <div class="hm-pro-history-mini">
+                                <span class="hm-pro-history-label">
+                                    {% trans "Last sessions" %}
+                                </span>
+                                <ul class="hm-pro-history-list">
+                                    {% for session in recent_sessions|slice:":3" %}
+                                        <li class="hm-pro-history-item">
+                                            <span class="hm-pro-history-name">
+                                                {{ session.title|default:_("Untitled") }}
+                                            </span>
+                                            <span class="hm-pro-history-meta">
+                                                {{ session.get_mode_display }} · {{ session.created_at|date:"H:i" }}
+                                            </span>
+                                        </li>
+                                    {% empty %}
+                                        <li class="hm-pro-history-item hm-pro-history-empty">
+                                            {% trans "No sessions yet." %}
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+
+                    </section>
+                </div>
+            </div>
+
+        </main>
+    </div>
+</div>
+
+<script src="{% static 'index_standard.js' %}"></script>
+
+</body>
+</html>

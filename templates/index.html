@@ -1,0 +1,328 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HearMe — AI Accessibility App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'index.css' %}">
+
+    <!-- JS -->
+    <script src="{% static 'core/js/index.js' %}" defer></script>
+</head>
+<body>
+<div class="page">
+    <div class="page-inner">
+        <div class="row">
+
+            <!-- LEFT: HERO + RECENT SESSIONS -->
+            <div class="reveal-on-scroll">
+                <section class="glass hero">
+                    <div class="hero-orb"></div>
+                    <div class="hero-orb-2"></div>
+
+                    <div class="badge">
+                        <span class="badge-dot"></span>
+                        <span>HearMe · AI Accessibility</span>
+                        <span class="badge-muted">for lectures & conversations</span>
+                    </div>
+
+                    <div class="typing">
+                        <span id="typing-text">Live captions for every voice.</span>
+                        <span class="typing-dot"></span>
+                        <span class="typing-dot"></span>
+                        <span class="typing-dot"></span>
+                    </div>
+
+                    <h1 class="hero-title">
+                        Real-time captions
+                        <span>for your classroom & life</span>
+                    </h1>
+
+                    <p class="hero-sub">
+                        HearMe turns spoken language into clear text: lectures, conversations, discussions.
+                        Save sessions, revisit them, and keep learning accessible — even when audio is not.
+                    </p>
+
+                    <div class="btn-row">
+                        {# TODO: replace # with the real URL, e.g. {% url 'session_create' %} #}
+                        <a href="#"
+                           class="btn btn-primary">
+                            <span class="btn-icon">▶</span>
+                            <span>Start new session</span>
+                        </a>
+
+                        {# TODO: replace # with {% url 'session_list' %} #}
+                        <a href="#"
+                           class="btn btn-ghost">
+                            <span class="btn-icon">📂</span>
+                            <span>View all sessions</span>
+                        </a>
+                    </div>
+
+                    <div class="hero-meta">
+                        <div class="hero-meta-item">
+                            <span class="hero-meta-pill-dot"></span>
+                            <span>English, Russian and Uzbek support</span>
+                        </div>
+                        <div class="hero-meta-item">
+                            <span>🧠 GPT-powered summaries and notes</span>
+                        </div>
+                    </div>
+
+                    <div class="hero-visual">
+                        <!-- Live waveform -->
+                        <div class="card">
+                            <div class="card-header-row">
+                                <span class="card-title">Live caption</span>
+                                <span class="status-pill">
+                                    <span class="status-dot"></span>
+                                    listening…
+                                </span>
+                            </div>
+
+                            <div class="wave-wrapper">
+                                {% for i in "||||||||||||||||||||||" %}
+                                    <div class="wave-bar"></div>
+                                {% endfor %}
+                            </div>
+
+                            <div class="card-footer">
+                                <div class="pill-row">
+                                    <div class="pill pill-strong">Lecture mode</div>
+                                    <div class="pill">English · en-US</div>
+                                </div>
+                                <span>00:12:37</span>
+                            </div>
+                        </div>
+
+                        <!-- Mini feature list -->
+                        <div class="card">
+                            <div class="card-header-row">
+                                <span class="card-title">HearMe summary</span>
+                                <span class="status-pill">
+                                    🧾 quick notes
+                                </span>
+                            </div>
+                            <ul class="feature-list">
+                                <li>Automatic key points after each session.</li>
+                                <li>Speaker labels: “Teacher”, “Student A/B”.</li>
+                                <li>Export notes for SAT / IELTS preparation.</li>
+                            </ul>
+                            <div class="card-footer">
+                                <span>Built for understanding, not just technology.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="hero-divider"></div>
+
+                    <!-- Recent sessions short -->
+                    <div class="hero-footer">
+                        <span>Recent sessions:</span>
+                        {% if sessions %}
+                            {% for session in sessions|slice:":2" %}
+                                <span class="session-tag">
+                                    {{ session.title|default:"Untitled" }} ·
+                                    {% if session.mode == "lecture" %}Lecture{% else %}Conversation{% endif %}
+                                    ·
+                                    {% if session.language == "en" %}EN{% elif session.language == "ru" %}RU{% elif session.language == "uz" %}UZ{% else %}{{ session.language }}{% endif %}
+                                </span>
+                            {% endfor %}
+                            {% if sessions|length > 2 %}
+                                <span class="hero-highlight">+ {{ sessions|length|add:"-2" }} more</span>
+                            {% endif %}
+                        {% else %}
+                            <span class="hero-highlight">no sessions yet — start your first one 🎧</span>
+                        {% endif %}
+                    </div>
+                </section>
+
+                <!-- RECENT SESSIONS FULL LIST -->
+                <section class="section">
+                    <div class="section-header">
+                        <div>
+                            <div class="section-title">Your sessions</div>
+                            <div class="section-sub">Quick access to your latest lectures and conversations.</div>
+                        </div>
+                        <div class="badge-soft">
+                            {% if sessions %}
+                                {{ sessions|length }} sessions
+                            {% else %}
+                                No saved sessions
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="session-list">
+                        {% if sessions %}
+                            {% for session in sessions|slice:":5" %}
+                                <article class="session-card">
+                                    <div class="session-main">
+                                        <h3 class="session-title">
+                                            {{ session.title|default:"Untitled" }}
+                                        </h3>
+                                        <div class="session-meta">
+                                            <span class="session-tag">
+                                                {% if session.mode == "lecture" %}Lecture{% else %}Conversation{% endif %}
+                                            </span>
+                                            <span class="session-tag">
+                                                {% if session.language == "en" %}English{% elif session.language == "ru" %}Russian{% elif session.language == "uz" %}Uzbek{% else %}{{ session.language }}{% endif %}
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="session-time">
+                                        {{ session.created_at|date:"d.m.Y · H:i" }}
+                                    </div>
+                                    <div class="session-actions">
+                                        {# TODO: {% url 'session_detail' session.id %} #}
+                                        <a href="#"
+                                           class="btn btn-outline btn-xxs">
+                                            Open
+                                        </a>
+                                        <button type="button"
+                                                class="btn btn-outline btn-xxs btn-danger">
+                                            Delete
+                                        </button>
+                                    </div>
+                                </article>
+                            {% endfor %}
+                        {% else %}
+                            <div class="section-sub">
+                                All future lectures, conversations and notes will appear here.
+                                Click “Start new session” to begin.
+                            </div>
+                        {% endif %}
+                    </div>
+                </section>
+            </div>
+
+            <!-- RIGHT: QUICK START PANEL + FEATURES -->
+            <div class="reveal-on-scroll">
+                <section class="glass secondary">
+                    <h2>Quick start</h2>
+                    <p class="secondary-sub">
+                        Choose a mode, language and session name — HearMe handles the rest.
+                    </p>
+
+                    <!-- Mode selector -->
+                    <div class="mode-row" id="mode-row" data-selected-mode="conversation">
+                        <button type="button" class="mode-btn active" data-mode="lecture">
+                            <span class="mode-label">Lecture mode</span>
+                            <span class="mode-desc">Perfect for long lectures, webinars and talks.</span>
+                        </button>
+                        <button type="button" class="mode-btn" data-mode="conversation">
+                            <span class="mode-label">Conversation mode</span>
+                            <span class="mode-desc">Best for dialogues, interviews, discussions.</span>
+                        </button>
+                    </div>
+
+                    <!-- Language selector -->
+                    <div class="language-row" id="language-row" data-selected-lang="en">
+                        <button type="button" class="lang-pill active" data-lang="en">English</button>
+                        <button type="button" class="lang-pill" data-lang="ru">Russian</button>
+                        <button type="button" class="lang-pill" data-lang="uz">Uzbek</button>
+                    </div>
+
+                    <!-- Session title -->
+                    <div class="input-wrapper">
+                        <input type="text"
+                               class="input"
+                               id="session-title-input"
+                               placeholder="Session title (optional)">
+                    </div>
+
+                    <div class="secondary-footer">
+                        <div class="secondary-hint">
+                            HearMe remembers your last mode and language.
+                        </div>
+                        <button type="button" class="btn btn-primary btn-sm" id="quick-start-btn">
+                            <span class="btn-icon">⚡</span>
+                            <span>Launch</span>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Feature cards -->
+                <section class="section">
+                    <div class="section-header">
+                        <div>
+                            <div class="section-title">Why HearMe matters</div>
+                            <div class="section-sub">Especially useful for hard-of-hearing users and students.</div>
+                        </div>
+                    </div>
+
+                    <div class="feature-grid">
+                        <article class="feature-card">
+                            <div class="feature-glow"></div>
+                            <h3>Accessible lectures</h3>
+                            <p>Live captions make it easier to follow along, even with accents or bad acoustics.</p>
+                            <div class="feature-chip-row">
+                                <span class="feature-chip">university classes</span>
+                                <span class="feature-chip">online courses</span>
+                            </div>
+                        </article>
+
+                        <article class="feature-card">
+                            <div class="feature-glow"></div>
+                            <h3>Conversation support</h3>
+                            <p>Conversation mode shows who said what, line by line.</p>
+                            <div class="feature-chip-row">
+                                <span class="feature-chip">interviews</span>
+                                <span class="feature-chip">group projects</span>
+                            </div>
+                        </article>
+
+                        <article class="feature-card">
+                            <div class="feature-glow"></div>
+                            <h3>Summaries & notes</h3>
+                            <p>After each session you get short bullet points and key ideas.</p>
+                            <div class="feature-chip-row">
+                                <span class="feature-chip">exam prep</span>
+                            </div>
+                        </article>
+
+                        <article class="feature-card">
+                            <div class="feature-glow"></div>
+                            <h3>Multilingual</h3>
+                            <p>Support for EN / RU / UZ to keep content understandable in your best language.</p>
+                            <div class="feature-chip-row">
+                                <span class="feature-chip">code-switching</span>
+                            </div>
+                        </article>
+
+                        <article class="feature-card">
+                            <div class="feature-glow"></div>
+                            <h3>History & search</h3>
+                            <p>Every session is saved — you can jump back to the exact moment you need.</p>
+                            <div class="feature-chip-row">
+                                <span class="feature-chip">date filters</span>
+                            </div>
+                        </article>
+
+                        <article class="feature-card">
+                            <div class="feature-glow"></div>
+                            <h3>Built by a student</h3>
+                            <p>HearMe is not just a school project — it’s an attempt to bring tech closer to people.</p>
+                            <div class="feature-chip-row">
+                                <span class="feature-chip">social impact</span>
+                                <span class="feature-chip">CS/AI portfolio</span>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'index.js' %}" defer></script>
+
+</body>
+</html>
