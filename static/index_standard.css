@@ -31,6 +31,7 @@ body {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
     background: radial-gradient(circle at top left, #e5f0ff 0, #f9fafb 55%, #f3f4f6 100%);
     color: var(--hm-text-main);
+    transition: background 0.5s ease, color 0.4s ease;
 }
 
 /* =============================
@@ -102,6 +103,7 @@ body {
     border-radius: 28px;
     box-shadow: var(--hm-shadow-soft);
     border: 1px solid rgba(229, 231, 235, 0.9);
+    transition: background 0.5s ease, box-shadow 0.5s ease, border-color 0.5s ease, transform 0.5s ease;
 }
 
 /* =============================
@@ -166,6 +168,19 @@ body {
     line-height: 1.4;
 }
 
+/* Navbar colors in Pro mode */
+body.hm-pro-active .hm-logo-text-main {
+    color: #f9fafb;
+}
+
+body.hm-pro-active .hm-logo-text-sub {
+    color: #9ca3af;
+}
+
+body.hm-pro-active .hm-tagline {
+    color: #e5e7eb;
+}
+
 /* =============================
    LANG SWITCHER (UI)
 ============================= */
@@ -177,6 +192,7 @@ body {
     background: rgba(248, 250, 252, 0.9);
     border: 1px solid rgba(209, 213, 219, 0.9);
     box-shadow: 0 10px 20px rgba(148, 163, 184, 0.3);
+    transition: background 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
 }
 
 .hm-lang-btn {
@@ -201,6 +217,22 @@ body {
     font-weight: 600;
 }
 
+/* Lang in Pro */
+body.hm-pro-active .hm-lang-form {
+    background: rgba(15, 23, 42, 0.96);
+    border-color: rgba(55, 65, 81, 0.95);
+    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.95);
+}
+
+body.hm-pro-active .hm-lang-btn {
+    color: #9ca3af;
+}
+
+body.hm-pro-active .hm-lang-btn-active {
+    background: linear-gradient(135deg, #4f46e5, #a855f7);
+    color: #f9fafb;
+}
+
 /* =============================
    MODE TOGGLE STANDARD/PRO
 ============================= */
@@ -211,6 +243,7 @@ body {
     border-radius: 999px;
     background: rgba(15, 23, 42, 0.04);
     border: 1px solid rgba(148, 163, 184, 0.4);
+    transition: background 0.4s ease, border-color 0.4s ease;
 }
 
 .hm-mode-toggle-btn {
@@ -235,6 +268,20 @@ body {
     font-weight: 600;
 }
 
+/* toggle in Pro */
+body.hm-pro-active .hm-mode-toggle {
+    background: rgba(15, 23, 42, 0.9);
+    border-color: rgba(55, 65, 81, 0.95);
+}
+
+body.hm-pro-active .hm-mode-toggle-btn {
+    color: #9ca3af;
+}
+
+body.hm-pro-active .hm-mode-toggle-active {
+    color: #f9fafb;
+}
+
 /* =============================
    MAIN SLIDES
 ============================= */
@@ -249,13 +296,15 @@ body {
     opacity: 0;
     pointer-events: none;
     transform: translateX(30px);
-    transition: opacity 0.35s ease-out, transform 0.35s ease-out, filter 0.35s ease-out;
+    filter: blur(4px);
+    transition: opacity 0.55s ease-out, transform 0.55s ease-out, filter 0.55s ease-out;
 }
 
 .hm-layout-active {
     opacity: 1;
     pointer-events: auto;
     transform: translateX(0);
+    filter: blur(0);
 }
 
 .hm-main-grid {
@@ -307,7 +356,6 @@ body {
 }
 
 .hm-title span {
-    background: linear.gradient(120deg, #fb7185, #fb923c, #38bdf8);
     background: linear-gradient(120deg, #fb7185, #fb923c, #38bdf8);
     -webkit-background-clip: text;
     color: transparent;
@@ -328,6 +376,16 @@ body {
     border: 1px solid rgba(209, 213, 219, 0.95);
     box-shadow: 0 12px 26px rgba(148, 163, 184, 0.35);
     padding: 14px 14px 12px;
+    transition: transform 0.5s ease, box-shadow 0.5s ease, background 0.5s ease, border-color 0.5s ease, filter 0.5s ease;
+}
+
+/* В Pro режиме белая капсула как будто уходит в глубину */
+body.hm-pro-active .hm-standard-card {
+    transform: translateY(6px) scale(0.97);
+    background: rgba(15, 23, 42, 0.98);
+    border-color: rgba(55, 65, 81, 0.95);
+    box-shadow: 0 26px 60px rgba(15, 23, 42, 0.95);
+    filter: saturate(1.1);
 }
 
 /* mode cards */
@@ -522,7 +580,6 @@ body {
     border-radius: 999px;
     background: #22c55e;
     box-shadow: 0 0 14px rgba(34, 197, 94, 0.9);
-    animation: hmMicPulse 1.2s.ease-in-out infinite alternate;
     animation: hmMicPulse 1.2s ease-in-out infinite alternate;
 }
 
@@ -751,7 +808,6 @@ body {
     font-size: 0.78rem;
     padding: 4px 10px;
     border-radius: 999px;
-    border: 1px солид rgba(209, 213, 219, 0.9);
     border: 1px solid rgba(209, 213, 219, 0.9);
     background: #ffffff;
     color: var(--hm-text-muted);
@@ -770,37 +826,46 @@ body {
 }
 
 /* =============================
-   AVATAR "ЭЛЕКТРО-ЗАРЯД" ПРИ ПЕРЕХОДЕ
+   AVATAR CHARGE / IGNITE EFFECT
+   Standard = мягкий заряд
+   Pro = "огненное" превращение
 ============================= */
-.hm-avatar-orbit.hm-avatar-charging {
-    animation: hmAvatarCharge 0.45s ease-out;
+
+/* Standard avatar charge */
+.hm-avatar-orbit-standard.hm-avatar-charging {
+    animation: hmAvatarChargeStandard 0.45s ease-out;
 }
 
-.hm-avatar-orbit.hm-avatar-charging .hm-avatar-orbit-waves {
+.hm-avatar-orbit-standard.hm-avatar-charging .hm-avatar-orbit-waves {
     animation: hmOrbitWaves 0.45s ease-out;
 }
 
-/* зарядка: небольшое дрожание + свечение */
-@keyframes hmAvatarCharge {
+/* Pro avatar ignite */
+.hm-avatar-orbit-pro.hm-avatar-charging {
+    animation: hmAvatarIgnitePro 0.6s ease-out;
+}
+
+.hm-avatar-orbit-pro.hm-avatar-charging .hm-avatar-face-pro {
+    animation: hmProFaceIgnite 0.6s ease-out;
+}
+
+/* лёгкий "заряд" для Standard */
+@keyframes hmAvatarChargeStandard {
     0% {
-        transform: scale(1) translate(0,0);
+        transform: scale(1);
         box-shadow: 0 18px 40px rgba(148, 163, 184, 0.6);
     }
-    20% {
-        transform: scale(1.03) translate(-3px, 2px);
-        box-shadow: 0 26px 50px rgba(96, 165, 250, 0.85);
-    }
     40% {
-        transform: scale(1.05) translate(2px, -3px);
-        box-shadow: 0 26px 50px rgba(152, 89, 247, 0.9);
+        transform: scale(1.03);
+        box-shadow: 0 24px 48px rgba(96, 165, 250, 0.9);
     }
     100% {
-        transform: scale(1) translate(0,0);
+        transform: scale(1);
         box-shadow: 0 18px 40px rgba(148, 163, 184, 0.6);
     }
 }
 
-/* волновая анимация вокруг */
+/* волновая анимация вокруг Standard-орбиты */
 @keyframes hmOrbitWaves {
     0% {
         opacity: 0;
@@ -810,12 +875,68 @@ body {
     50% {
         opacity: 1;
         transform: scale(1);
-        box-shadow: 0 0 0 12px rgba(96, 165, 250, 0.0);
+        box-shadow: 0 0 0 14px rgba(96, 165, 250, 0);
     }
     100% {
         opacity: 0;
         transform: scale(1.2);
-        box-shadow: 0 0 0 20px rgba(168, 85, 247, 0.0);
+        box-shadow: 0 0 0 24px rgba(168, 85, 247, 0);
+    }
+}
+
+/* "огненное" превращение орбиты в Pro */
+@keyframes hmAvatarIgnitePro {
+    0% {
+        transform: scale(1);
+        box-shadow:
+            0 20px 50px rgba(15, 23, 42, 1),
+            0 0 40px rgba(129, 140, 248, 0.7);
+        filter: brightness(1) saturate(1);
+    }
+    25% {
+        transform: scale(1.08);
+        box-shadow:
+            0 28px 70px rgba(168, 85, 247, 1),
+            0 0 90px rgba(236, 72, 153, 0.95);
+        filter: brightness(1.35) saturate(1.35);
+    }
+    55% {
+        transform: scale(1.04);
+        box-shadow:
+            0 24px 60px rgba(59, 130, 246, 1),
+            0 0 100px rgba(56, 189, 248, 1);
+        filter: brightness(1.2) saturate(1.25);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow:
+            0 20px 50px rgba(15, 23, 42, 1),
+            0 0 60px rgba(129, 140, 248, 0.8);
+        filter: brightness(1) saturate(1);
+    }
+}
+
+/* вспышка лица Pro-аватара */
+@keyframes hmProFaceIgnite {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 34px rgba(168, 85, 247, 0.95);
+        filter: brightness(1) saturate(1);
+    }
+    35% {
+        transform: scale(1.1);
+        box-shadow: 0 0 80px rgba(250, 250, 250, 1);
+        filter: brightness(1.5) saturate(1.4);
+    }
+    70% {
+        transform: scale(1.04);
+        box-shadow: 0 0 60px rgba(168, 85, 247, 1);
+        filter: brightness(1.2) saturate(1.3);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 34px rgba(168, 85, 247, 0.95);
+        filter: brightness(1) saturate(1);
     }
 }
 
@@ -1145,10 +1266,10 @@ body.hm-pro-active .hm-shell {
     width: 78px;
     height: 78px;
     border-radius: 50%;
-    background: radial-gradient(circle at 30% 0, #a855f7, #020617 65%);
+    background: radial-gradient(circle at 30% 0, #c084fc 8%, #7c3aed 35%, #020617 80%);
     position: relative;
     overflow: hidden;
-    box-shadow: 0 0 28px rgba(168, 85, 247, 0.85);
+    box-shadow: 0 0 34px rgba(168, 85, 247, 0.95);
 }
 
 /* headphones: дуга и "уши" */
@@ -1182,12 +1303,12 @@ body.hm-pro-active .hm-shell {
 /* глаза */
 .hm-avatar-pro-eye {
     position: absolute;
-    top: 38%;
-    width: 9px;
-    height: 9px;
+    top: 40%;
+    width: 14px;
+    height: 4px;
     border-radius: 999px;
-    background: #0f172a;
-    box-shadow: 0 0 10px rgba(248, 250, 252, 0.4);
+    background: #e5e7eb;
+    box-shadow: 0 0 10px rgba(248, 250, 252, 0.9);
 }
 
 .hm-avatar-pro-eye-left {
@@ -1271,12 +1392,10 @@ body.hm-pro-active .hm-shell {
     height: 12px;
     border-radius: 999px;
     background: linear-gradient(90deg, rgba(15,23,42,1), rgba(96,165,250,1));
-    animation: hmBarsPulse 1.6s.ease-in-out infinite;
     animation: hmBarsPulse 1.6s ease-in-out infinite;
 }
 
 .hm-pro-bar:nth-child(2) {
-    animation.delay: 0.15s;
     animation-delay: 0.15s;
 }
 .hm-pro-bar:nth-child(3) {

@@ -1,0 +1,243 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-11-23 15:32+0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+
+
+#: .\templates\index_standard.html:9
+msgid "Speech to Text Assistant"
+msgstr "Nutqni matnga aylantirish assistenti"
+
+#: .\templates\index_standard.html:32
+msgid "AI Accessibility Project"
+msgstr "AI orqali imkoniyatlar loyihasi"
+
+#: .\templates\index_standard.html:39
+msgid "Turn speech into clear text — for lectures, lessons and conversations."
+msgstr "Nutqni aniq matnga aylantiring — ma’ruzalar, darslar va suhbatlar uchun."
+
+#: .\templates\index_standard.html:66
+msgid "Standard"
+msgstr "Standart"
+
+#: .\templates\index_standard.html:71
+msgid "Pro mode"
+msgstr "Pro rejimi"
+
+#: .\templates\index_standard.html:90
+msgid "Ready when you are"
+msgstr "Siz tayyor bo‘lsangiz — biz ham tayyormiz"
+
+#: .\templates\index_standard.html:93
+msgid "Start a"
+msgstr "Boshlang"
+
+#: .\templates\index_standard.html:94
+msgid "clean recording"
+msgstr "yangi yozuvni"
+
+#: .\templates\index_standard.html:95
+msgid "in one click."
+msgstr "bir bosishda."
+
+#: .\templates\index_standard.html:98
+msgid ""
+"Pick a mode, choose the language, and HearMe will transcribe everything for "
+"you."
+msgstr "Rejimni va tilni tanlang — HearMe hamma narsani siz uchun matnga aylantiradi."
+
+#: .\templates\index_standard.html:109
+msgid "Session mode"
+msgstr "Sessiya rejimi"
+
+#: .\templates\index_standard.html:116 .\templates\index_standard.html:294
+msgid "Long-form"
+msgstr "Uzun shakl"
+
+#: .\templates\index_standard.html:119
+msgid "Lecture mode"
+msgstr "Ma’ruza rejimi"
+
+#: .\templates\index_standard.html:121
+msgid "For classes & presentations"
+msgstr "Darslar va taqdimotlar uchun"
+
+#: .\templates\index_standard.html:125
+msgid "Optimized for long lessons, talks and speeches."
+msgstr "Uzun darslar, chiqishlar va ma’ruzalar uchun optimallashtirilgan."
+
+#: .\templates\index_standard.html:132
+msgid "Conversations"
+msgstr "Suhbatlar"
+
+#: .\templates\index_standard.html:135
+msgid "Conversation mode"
+msgstr "Suhbat rejimi"
+
+#: .\templates\index_standard.html:137
+msgid "For dialogues & meetings"
+msgstr "Dialoglar va uchrashuvlar uchun"
+
+#: .\templates\index_standard.html:141
+msgid "Short dynamic chunks for discussions and Q&A."
+msgstr "Munozaralar va savol-javoblar uchun qisqa, dinamik bo‘limlar."
+
+#: .\templates\index_standard.html:149 .\templates\index_standard.html:324
+msgid "Speech language"
+msgstr "Nutq tili"
+
+#: .\templates\index_standard.html:155
+msgid "English"
+msgstr "Ingliz"
+
+#: .\templates\index_standard.html:160
+msgid "Russian"
+msgstr "Rus"
+
+#: .\templates\index_standard.html:165
+msgid "Uzbek"
+msgstr "O‘zbek"
+
+#: .\templates\index_standard.html:169
+msgid "This is the language people will speak in this session."
+msgstr "Bu sessiyada ishlatiladigan nutq tili."
+
+#: .\templates\index_standard.html:176
+msgid "Start recording"
+msgstr "Yozishni boshlash"
+
+#: .\templates\index_standard.html:199
+msgid "Recent sessions"
+msgstr "Oxirgi sessiyalar"
+
+#: .\templates\index_standard.html:202
+msgid "Library"
+msgstr "Kutubxona"
+
+#: .\templates\index_standard.html:212
+msgid "Untitled session"
+msgstr "Nomsiz sessiya"
+
+#: .\templates\index_standard.html:229
+msgid "You don't have any sessions yet."
+msgstr "Hozircha sessiyangiz yo‘q."
+
+#: .\templates\index_standard.html:236
+msgid "built for accessibility"
+msgstr "hamma uchun yaratilgan"
+
+#: .\templates\index_standard.html:240
+msgid "Simple, friendly and clear — made for everyone."
+msgstr "Sodda, qulay va tushunarli — har bir kishi uchun."
+
+#: .\templates\index_standard.html:255
+msgid "Pro mode activated"
+msgstr "Pro rejimi faollashtirildi"
+
+#: .\templates\index_standard.html:258
+msgid "Advanced transcription console"
+msgstr "Kengaytirilgan transkripsiya konsoli"
+
+#: .\templates\index_standard.html:261
+msgid ""
+"Fine-tuned controls, richer feedback and a darker interface for deep work "
+"sessions."
+msgstr "Aniq sozlamalar, to‘liqroq fikr-mulohaza va chuqur ish uchun qoramtir interfeys."
+
+#: .\templates\index_standard.html:268
+msgid "AI engine"
+msgstr "AI engine"
+
+#: .\templates\index_standard.html:268
+msgid "Online"
+msgstr "Online"
+
+#: .\templates\index_standard.html:271
+msgid "Latency"
+msgstr "Latency"
+
+#: .\templates\index_standard.html:274
+msgid "Stability"
+msgstr "Stability"
+
+#: .\templates\index_standard.html:285
+msgid "Session profile"
+msgstr "Sessiya profili"
+
+#: .\templates\index_standard.html:295
+msgid "Recommended"
+msgstr "Tavsiya etiladi"
+
+#: .\templates\index_standard.html:298
+msgid "Lecture mode +"
+msgstr "Ma’ruza rejimi +"
+
+#: .\templates\index_standard.html:301
+msgid ""
+"Continuous capture with smarter segmentation and noise-resilient decoding "
+"for complex lectures."
+msgstr "Murakkab ma’ruzalar uchun aqlli segmentatsiya va shovqinga chidamli dekodlash bilan uzluksiz yozuv."
+
+#: .\templates\index_standard.html:309
+msgid "Dialogues"
+msgstr "Dialoglar"
+
+#: .\templates\index_standard.html:310
+msgid "Dynamic"
+msgstr "Dinamik"
+
+#: .\templates\index_standard.html:313
+msgid "Conversation mode +"
+msgstr "Suhbat rejimi +"
+
+#: .\templates\index_standard.html:316
+msgid ""
+"Segmented interaction tuned for fast Q&A, consultations and overlapping "
+"speakers."
+msgstr "Tezkor Q&A, konsultatsiyalar va bir-biriga ustma-ust tushadigan nutqlar uchun segmentlangan ishlov."
+
+#: .\templates\index_standard.html:349
+msgid "Launch advanced session"
+msgstr "Kengaytirilgan sessiyani ishga tushirish"
+
+#: .\templates\index_standard.html:352
+msgid ""
+"Pro mode keeps the interface dark and focused while using the same safe "
+"engine under the hood."
+msgstr "Pro rejimi qoramtir, diqqatni jamlovchi interfeysni saqlaydi va xavfsiz AI mexanizmidan foydalanadi."
+
+#: .\templates\index_standard.html:378
+msgid "Signal overview"
+msgstr "Signal ko‘rinishi"
+
+#: .\templates\index_standard.html:381
+msgid "Live"
+msgstr "Live"
+
+#: .\templates\index_standard.html:393
+msgid "Last sessions"
+msgstr "Oxirgi sessiyalar"
+
+#: .\templates\index_standard.html:399
+msgid "Untitled"
+msgstr "Nomsiz"
+
+#: .\templates\index_standard.html:407
+msgid "No sessions yet."
+msgstr "Sessiyalar mavjud emas."

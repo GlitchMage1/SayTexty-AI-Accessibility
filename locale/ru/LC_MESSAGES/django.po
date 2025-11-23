@@ -1,0 +1,245 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-11-23 15:32+0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
+"(n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+
+
+#: .\templates\index_standard.html:9
+msgid "Speech to Text Assistant"
+msgstr "Ассистент преобразования речи в текст"
+
+#: .\templates\index_standard.html:32
+msgid "AI Accessibility Project"
+msgstr "Проект доступности с AI"
+
+#: .\templates\index_standard.html:39
+msgid "Turn speech into clear text — for lectures, lessons and conversations."
+msgstr "Преобразуйте речь в понятный текст — для лекций, уроков и разговоров."
+
+#: .\templates\index_standard.html:66
+msgid "Standard"
+msgstr "Стандарт"
+
+#: .\templates\index_standard.html:71
+msgid "Pro mode"
+msgstr "Pro режим"
+
+#: .\templates\index_standard.html:90
+msgid "Ready when you are"
+msgstr "Готов, когда вы готовы"
+
+#: .\templates\index_standard.html:93
+msgid "Start a"
+msgstr "Начать"
+
+#: .\templates\index_standard.html:94
+msgid "clean recording"
+msgstr "чистую запись"
+
+#: .\templates\index_standard.html:95
+msgid "in one click."
+msgstr "в один клик."
+
+#: .\templates\index_standard.html:98
+msgid ""
+"Pick a mode, choose the language, and HearMe will transcribe everything for "
+"you."
+msgstr "Выберите режим и язык — HearMe всё аккуратно расшифрует за вас."
+
+#: .\templates\index_standard.html:109
+msgid "Session mode"
+msgstr "Режим сессии"
+
+#: .\templates\index_standard.html:116 .\templates\index_standard.html:294
+msgid "Long-form"
+msgstr "Длинный формат"
+
+#: .\templates\index_standard.html:119
+msgid "Lecture mode"
+msgstr "Режим лекции"
+
+#: .\templates\index_standard.html:121
+msgid "For classes & presentations"
+msgstr "Для уроков и презентаций"
+
+#: .\templates\index_standard.html:125
+msgid "Optimized for long lessons, talks and speeches."
+msgstr "Оптимизирован для длительных уроков, выступлений и лекций."
+
+#: .\templates\index_standard.html:132
+msgid "Conversations"
+msgstr "Разговоры"
+
+#: .\templates\index_standard.html:135
+msgid "Conversation mode"
+msgstr "Режим беседы"
+
+#: .\templates\index_standard.html:137
+msgid "For dialogues & meetings"
+msgstr "Для диалогов и встреч"
+
+#: .\templates\index_standard.html:141
+msgid "Short dynamic chunks for discussions and Q&A."
+msgstr "Короткие динамичные фрагменты для обсуждений и вопросов-ответов."
+
+#: .\templates\index_standard.html:149 .\templates\index_standard.html:324
+msgid "Speech language"
+msgstr "Язык речи"
+
+#: .\templates\index_standard.html:155
+msgid "English"
+msgstr "Английский"
+
+#: .\templates\index_standard.html:160
+msgid "Russian"
+msgstr "Русский"
+
+#: .\templates\index_standard.html:165
+msgid "Uzbek"
+msgstr "Узбекский"
+
+#: .\templates\index_standard.html:169
+msgid "This is the language people will speak in this session."
+msgstr "Язык, на котором будут говорить в этой сессии."
+
+#: .\templates\index_standard.html:176
+msgid "Start recording"
+msgstr "Начать запись"
+
+#: .\templates\index_standard.html:199
+msgid "Recent sessions"
+msgstr "Недавние сессии"
+
+#: .\templates\index_standard.html:202
+msgid "Library"
+msgstr "Библиотека"
+
+#: .\templates\index_standard.html:212
+msgid "Untitled session"
+msgstr "Сессия без названия"
+
+#: .\templates\index_standard.html:229
+msgid "You don't have any sessions yet."
+msgstr "У вас пока нет сессий."
+
+#: .\templates\index_standard.html:236
+msgid "built for accessibility"
+msgstr "создано для доступности"
+
+#: .\templates\index_standard.html:240
+msgid "Simple, friendly and clear — made for everyone."
+msgstr "Просто, понятно и дружелюбно — создано для всех."
+
+#: .\templates\index_standard.html:255
+msgid "Pro mode activated"
+msgstr "Pro режим активирован"
+
+#: .\templates\index_standard.html:258
+msgid "Advanced transcription console"
+msgstr "Расширенная консоль транскрипции"
+
+#: .\templates\index_standard.html:261
+msgid ""
+"Fine-tuned controls, richer feedback and a darker interface for deep work "
+"sessions."
+msgstr "Тонкие настройки, больше обратной связи и тёмный интерфейс для глубокого фокуса."
+
+#: .\templates\index_standard.html:268
+msgid "AI engine"
+msgstr "AI-движок"
+
+#: .\templates\index_standard.html:268
+msgid "Online"
+msgstr "Онлайн"
+
+#: .\templates\index_standard.html:271
+msgid "Latency"
+msgstr "Задержка"
+
+#: .\templates\index_standard.html:274
+msgid "Stability"
+msgstr "Стабильность"
+
+#: .\templates\index_standard.html:285
+msgid "Session profile"
+msgstr "Профиль сессии"
+
+#: .\templates\index_standard.html:295
+msgid "Recommended"
+msgstr "Рекомендовано"
+
+#: .\templates\index_standard.html:298
+msgid "Lecture mode +"
+msgstr "Режим лекции +"
+
+#: .\templates\index_standard.html:301
+msgid ""
+"Continuous capture with smarter segmentation and noise-resilient decoding "
+"for complex lectures."
+msgstr "Непрерывная запись с умной сегментацией и устойчивым к шуму декодированием для сложных лекций."
+
+#: .\templates\index_standard.html:309
+msgid "Dialogues"
+msgstr "Диалоги"
+
+#: .\templates\index_standard.html:310
+msgid "Dynamic"
+msgstr "Динамика"
+
+#: .\templates\index_standard.html:313
+msgid "Conversation mode +"
+msgstr "Режим беседы +"
+
+#: .\templates\index_standard.html:316
+msgid ""
+"Segmented interaction tuned for fast Q&A, consultations and overlapping "
+"speakers."
+msgstr "Сегментированное распознавание для быстрых Q&A, консультаций и ситуаций с одновременной речью."
+
+#: .\templates\index_standard.html:349
+msgid "Launch advanced session"
+msgstr "Запустить расширенную сессию"
+
+#: .\templates\index_standard.html:352
+msgid ""
+"Pro mode keeps the interface dark and focused while using the same safe "
+"engine under the hood."
+msgstr "Pro режим сохраняет тёмный, сфокусированный интерфейс, используя тот же безопасный движок."
+
+#: .\templates\index_standard.html:378
+msgid "Signal overview"
+msgstr "Обзор сигнала"
+
+#: .\templates\index_standard.html:381
+msgid "Live"
+msgstr "В реальном времени"
+
+#: .\templates\index_standard.html:393
+msgid "Last sessions"
+msgstr "Последние сессии"
+
+#: .\templates\index_standard.html:399
+msgid "Untitled"
+msgstr "Без названия"
+
+#: .\templates\index_standard.html:407
+msgid "No sessions yet."
+msgstr "Пока нет сессий."

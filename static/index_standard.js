@@ -1,4 +1,4 @@
-// helper
+// helpers
 const $ = (sel) => document.querySelector(sel);
 const $$ = (sel) => Array.from(document.querySelectorAll(sel));
 
@@ -67,11 +67,11 @@ function triggerAvatarCharge(selector) {
     if (!orbit) return;
 
     orbit.classList.remove("hm-avatar-charging");
-    void orbit.offsetWidth; // restart animation
+    void orbit.offsetWidth; // перезапуск анимации
     orbit.classList.add("hm-avatar-charging");
     setTimeout(() => {
         orbit.classList.remove("hm-avatar-charging");
-    }, 500);
+    }, 600);
 }
 
 // ========== STANDARD: cards active by radio ==========
