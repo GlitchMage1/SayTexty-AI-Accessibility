@@ -9,7 +9,8 @@ from .views import *
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", index, name='index'),
-    path('set-language/', set_language, name='set_language')
+    path('set-language/', set_language, name='set_language'),
+    path('set-mode/', set_mode, name='set_mode'),
 ]
 
 

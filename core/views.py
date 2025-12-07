@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse  
+from django.http import HttpResponse, JsonResponse 
 from .models import * 
 from django.conf import settings
 from django.utils import translation
@@ -18,7 +18,42 @@ def index(request):
     print("ACTIVE :", get_language())    
 
 
-    return render(request, "index_standard.html")
+    ui_mode = request.session.get('ui_mode', 'standard')
+    if ui_mode not in ('standard', 'pro'):
+        ui_mode = 'standard'
+
+
+
+
+    context = {
+        'mode': ui_mode,
+    }
+
+    print("SESSION ui_mode =", request.session.get("ui_mode"))
+
+    return render(request, "index_standard.html", context)
+
+
+
+
+
+
+
+def set_mode(request):
+
+    if request.method != 'POST':
+        return JsonResponse({'ok':False, 'error':'Only POST allowed'}, status=405)
+    
+    mode = request.POST.get('mode')
+    print("AJAX set_mode, raw mode:", mode)
+    
+
+    if mode not in ('standard', 'pro'):
+        return JsonResponse({'ok':False, 'error':'Invalid mode'}, status=400)
+    
+    request.session['ui_mode'] = mode
+    print("SESSION ui_mode set to:", request.session.get("ui_mode"))
+    return JsonResponse({'ok':True, 'mode':mode})
 
 
 

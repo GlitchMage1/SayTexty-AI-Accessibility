@@ -34,11 +34,11 @@ msgstr "Nutqni aniq matnga aylantiring — ma’ruzalar, darslar va suhbatlar uc
 
 #: .\templates\index_standard.html:66
 msgid "Standard"
-msgstr "Standart"
+msgstr "Standard"
 
 #: .\templates\index_standard.html:71
 msgid "Pro mode"
-msgstr "Pro rejimi"
+msgstr "Pro mode"
 
 #: .\templates\index_standard.html:90
 msgid "Ready when you are"

@@ -25,7 +25,7 @@ window.addEventListener("load", () => {
     initFadeCards();
 });
 
-// ========== MODE TOGGLE STANDARD / PRO ==========
+// ========== MODE TOGGLE STANDARD / PRO (с AJAX) ==========
 function initModeToggle() {
     const buttons = $$(".hm-mode-toggle-btn");
     const layouts = {
@@ -40,11 +40,10 @@ function initModeToggle() {
             const view = btn.getAttribute("data-view");
             if (!view) return;
 
-            // активная кнопка
+            
             buttons.forEach((b) => b.classList.remove("hm-mode-toggle-active"));
             btn.classList.add("hm-mode-toggle-active");
 
-            // активный layout
             layouts.standard.classList.remove("hm-layout-active");
             layouts.pro.classList.remove("hm-layout-active");
 
@@ -57,17 +56,20 @@ function initModeToggle() {
                 document.body.classList.add("hm-pro-active");
                 triggerAvatarCharge(".hm-avatar-orbit-pro");
             }
+
+            
+            saveModeToServer(view);
         });
     });
 }
 
-// маленькая вспышка при смене режима
+
 function triggerAvatarCharge(selector) {
     const orbit = $(selector);
     if (!orbit) return;
 
     orbit.classList.remove("hm-avatar-charging");
-    void orbit.offsetWidth; // перезапуск анимации
+    void orbit.offsetWidth; 
     orbit.classList.add("hm-avatar-charging");
     setTimeout(() => {
         orbit.classList.remove("hm-avatar-charging");
@@ -147,4 +149,40 @@ function initFadeCards() {
             card.classList.add("fade-card-show");
         }, 100 + index * 120);
     });
+}
+
+// =======================
+// AJAX:  SAVE MODE
+// =======================
+function saveModeToServer(mode) {
+    fetch("/set-mode/", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+            "X-CSRFToken": getCookie("csrftoken"),
+        },
+        body: `mode=${encodeURIComponent(mode)}`,
+    }).then((res) => {
+        if (!res.ok) {
+            console.warn("Failed to save mode", res.status);
+        }
+    }).catch((err) => {
+        console.error("Error saving mode", err);
+    });
+}
+
+// CSRF helper 
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== "") {
+        const cookies = document.cookie.split(";");
+        for (let cookie of cookies) {
+            cookie = cookie.trim();
+            if (cookie.startsWith(name + "=")) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
 }

@@ -36,11 +36,11 @@ msgstr "Преобразуйте речь в понятный текст — д�
 
 #: .\templates\index_standard.html:66
 msgid "Standard"
-msgstr "Стандарт"
+msgstr "Standard"
 
 #: .\templates\index_standard.html:71
 msgid "Pro mode"
-msgstr "Pro режим"
+msgstr "Pro mode"
 
 #: .\templates\index_standard.html:90
 msgid "Ready when you are"

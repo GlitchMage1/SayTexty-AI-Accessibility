@@ -10,7 +10,10 @@
     <link rel="stylesheet" href="{% static 'index_standard.css' %}">
 </head>
 
-<body>
+<body class="{% if mode == 'pro' %}hm-pro-active{% endif %}"
+      data-ui-mode="{{ mode|default:'standard' }}"
+      data-set-mode-url="{% url 'set_mode' %}">
+
 
 <!-- PRELOADER -->
 <div id="hm-preloader">
@@ -61,16 +64,17 @@
                 <!-- MODE TOGGLE: STANDARD / PRO -->
                 <div class="hm-mode-toggle">
                     <button type="button"
-                            class="hm-mode-toggle-btn hm-mode-toggle-active"
+                            class="hm-mode-toggle-btn{% if mode == 'standard' %} hm-mode-toggle-active{% endif %}"
                             data-view="standard">
                         {% trans "Standard" %}
                     </button>
                     <button type="button"
-                            class="hm-mode-toggle-btn"
+                            class="hm-mode-toggle-btn{% if mode == 'pro' %} hm-mode-toggle-active{% endif %}"
                             data-view="pro">
                         {% trans "Pro mode" %}
                     </button>
                 </div>
+
 
             </div>
         </header>
@@ -79,7 +83,7 @@
         <main class="hm-main">
 
             <!-- ================= STANDARD LAYOUT ================ -->
-            <div class="hm-layout hm-layout-standard hm-layout-active">
+            <div class="hm-layout hm-layout-standard {% if mode != 'pro' %}hm-layout-active{% endif %}">
                 <div class="hm-main-grid">
 
                     <!-- LEFT -->
@@ -245,7 +249,7 @@
             </div>
 
             <!-- ================= PRO / HARD LAYOUT (TECH) ================ -->
-            <div class="hm-layout hm-layout-pro">
+            <div class="hm-layout hm-layout-pro {% if mode == 'pro' %}hm-layout-active{% endif %}">
                 <div class="hm-main-grid-pro">
 
                     <!-- LEFT: ADVANCED CONSOLE -->
@@ -418,6 +422,13 @@
         </main>
     </div>
 </div>
+
+
+
+<script>
+    window.SERVER_UI_MODE = "{{ mode|default:'standard' }}";
+    window.SET_MODE_URL = "{% url 'set_mode' %}";
+</script>
 
 <script src="{% static 'index_standard.js' %}"></script>
 
