@@ -22,7 +22,7 @@ class Session(models.Model): # type: ignore
     updated_at = models.DateTimeField(auto_now=True)
 
 
-    def str(self):
+    def __str__(self):
         return f"{self.title or 'Session'} ({self.get_mode_display()} - {self.language})"
 
 
@@ -46,7 +46,7 @@ class TranscriptChunk(models.Model):
     class Meta:
         ordering = ['id']
 
-    def str(self):
+    def __str__(self):
         return f"{self.speaker}: {self.text[:50]}"
     
 
@@ -64,7 +64,7 @@ class Summary(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
 
-    def str(self):
+    def __str__(self):
         return f"{self.get_kind_display()} for Session #{self.session.id}"
     
 
@@ -84,5 +84,5 @@ class UserSettings(models.Model):
     theme = models.CharField(max_length=10, choices=THEME_CHOICES, default='light')
     simplified_mode = models.BooleanField(default=False)
 
-    def str(self):
+    def __str__(self):
         return f"Setting {self.theme}, {self.font_size}"

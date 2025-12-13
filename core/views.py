@@ -1,12 +1,12 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, JsonResponse 
+from django.http import HttpResponse, JsonResponse, HttpResponseBadRequest
 from .models import * 
 from django.conf import settings
 from django.utils import translation
 from django.utils.translation import get_language
-
-
-
+import json
+from django.views.decorators.http import require_POST
+from django.utils import timezone
 
 
 
@@ -78,9 +78,81 @@ def set_language(request):
 
 
 
+@require_POST
+def api_start_session(request):
 
-def start_session(request):
-    pass
+    try:
+        data = json.loads(request.body.decode("utf-8"))
+    except json.JSONDecodeError:
+        data = request.POST
+    
+
+    mode = data.get('mode', 'converstation')
+    language = data.get('language', 'en')
+
+
+    if mode not in ('lecture', 'conversation'):
+        return HttpResponseBadRequest('Invalide mode')
+
+    if language not in ('en', 'ru', 'uz'):
+        return HttpResponseBadRequest('Invalide language')
+
+
+    session = Session.objects.create(
+        title = '',
+        mode=mode,
+        language=language,
+
+    )
+
+
+    return JsonResponse({'session_id':session.id})
 
 
 
+@require_POST
+def api_upload_chunk(request, session_id):
+
+
+    try:
+        session = Session.objects.get(id=session_id)
+    except Session.DoesNotExist:
+        return HttpResponseBadRequest("Uknown session")
+    
+    audio_file = request.FILES.get('audio')
+    start_ms = request.POST.get('start_ms')
+    end_ms = request.POST.get('end_ms')
+
+
+    try:
+        start_ms = int(start_ms) if start_ms is not None else None
+    except ValueError:
+        start_ms = None
+    
+    try:
+        end_ms = int(end_ms) if end_ms is not None else None
+    except ValueError:
+        end_ms = None
+
+
+    now_str = timezone.now().strftime("%H:%M:%S")
+    recognized_text = f"[chunk @ {now_srt}] Fake transcript text..."
+
+
+    chunk = TranscriptChunk.objects.create(
+        session=session,
+        speaker='A',
+        text=recognized_text,
+        start_ms=start_ms,
+        end_ms=end_ms,
+    )
+    
+
+    return JsonResponse(
+        {
+            "id": chunk.id,
+            "text": chunk.text,
+            "start_ms": chunk.start_ms,
+            "end_ms": chunk.end_ms,
+        }
+    )
